@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router } from "react-router-dom";
+import UsersRoutes from "./Users/Routes";
+import PostsRoutes from './Posts/Routes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: 'Open Sans, sans-serif',
+  }
+})
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <UsersRoutes/>
+          <PostsRoutes/>
+        </Router>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 
