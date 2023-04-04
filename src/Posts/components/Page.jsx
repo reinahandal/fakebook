@@ -35,7 +35,7 @@ function Page() {
     }
     if (isError) {
         return (
-            <Typography variant="h5">Something went wrong...</Typography>
+            <Typography variant="h5">Something went wrong</Typography>
         )
     }
     else {

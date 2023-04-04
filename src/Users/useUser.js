@@ -6,7 +6,6 @@ export const useUser = id => {
     const { data, isLoading, isError } = useQuery({
         queryKey: [QUERY_KEY.SINGLE, id],
         queryFn: () => fetchUser(id),
-        enabled: !!id,
     });
 
     return {

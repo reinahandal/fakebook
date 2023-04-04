@@ -15,5 +15,3 @@ export const usePost = id => {
     }
 
 }
-
-// export default usePost;

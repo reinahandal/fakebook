@@ -1,4 +1,4 @@
-import { Button, Container, Paper, Typography } from "@material-ui/core";
+import { Button, Paper, Typography } from "@material-ui/core";
 import { generatePath, Link, useParams } from "react-router-dom";
 import { usePost } from "../usePost";
 import { useUser } from '../../../Users/useUser';
@@ -36,27 +36,30 @@ const useStyles = makeStyles({
 function Page() {
     const { id } = useParams();
     const classes = useStyles();
-    const { data: post, isLoading: isPostLoading, isError } = usePost(id);
+    const { data: post, isLoading: isPostLoading, isError: isPostError } = usePost(id);
     
     const { data: user, isLoading: isUserLoading, isError: isUserError} = useUser(post?.userId);
 
-    if(isUserLoading || isPostLoading){
-        return (<Typography>Loading...</Typography>)
+    if(isPostLoading || isUserLoading){
+        return (<Typography>Loading Post...</Typography>)
+    }
+    if(isPostError) {
+        return (<Typography>Something went wrong</Typography>)
     }
 
     return (
         <div className={classes.root}>
             <Typography 
                 component={Link} 
-                to={generatePath(POSTS_ROUTES.USER, {id: user.id})}
+                to={generatePath(POSTS_ROUTES.USER, {id: post?.userId})}
             >
             Go back
             </Typography>
             <Paper className={classes.post}>
                 <div className={classes.topSection}>
                     <div className={classes.userProfile}>
-                        <Typography>{user.name}</Typography>
-                        <Typography color="textSecondary">{` ${user.username} - ${user.email}`}</Typography>
+                        <Typography>{user?.name}</Typography>
+                        <Typography color="textSecondary">{` ${user?.username} - ${user?.email}`}</Typography>
                     </div>
                     <div className={classes.buttons}>
                         <Button 

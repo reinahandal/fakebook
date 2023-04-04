@@ -1,8 +1,8 @@
 import { Route } from "react-router-dom";
 import Container from "./Container";
 import { ROUTES } from './constants';
-import PostForm from "./components/PostForm";
 import PostOverviewRoutes from './PostOverview/Routes';
+import CreatePost from "./components/CreatePost";
 
 function Routes(){
     return (
@@ -10,7 +10,7 @@ function Routes(){
         <Route path={ROUTES.USER}>
             <Container/>
             <Route path={ROUTES.NEW}>
-                <PostForm/>
+                <CreatePost/>
             </Route>
         </Route>
         <PostOverviewRoutes/>
