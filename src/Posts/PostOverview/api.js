@@ -10,7 +10,13 @@ export const fetch = async id => {
     }
 }
 
-export const deletePost = id => httpClient.delete(generatePath(`/posts/:id`, {id}))
+export const deletePost = async (userId, postId) => {
+    const resp = await httpClient.delete(generatePath(`/posts/:id`, {id: postId}))
+    return {
+        userId: userId.toString(),
+        postId,
+    }
+}  
 
 
 export const updatePost = async (id, post) => {

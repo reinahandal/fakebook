@@ -7,7 +7,6 @@ export const usePosts = id => {
         queryKey: [QUERY_KEY.POSTS, id],
         queryFn: () => fetchPosts(id),
     });
-
     return {
         data,
         isLoading,

@@ -5,6 +5,7 @@ import { useUser } from '../../../Users/useUser';
 import { makeStyles } from "@material-ui/styles";
 import { ROUTES as POSTS_ROUTES } from "../../constants";
 import { ROUTES } from "../constants";
+import DeleteButton from "./DeleteButton";
 
 const useStyles = makeStyles({
     root:{
@@ -68,15 +69,18 @@ function Page() {
                             component={Link}
                             to={generatePath(ROUTES.EDIT, {id: post.id})}
                         >
-                        Edit
+                            Edit
                         </Button>
-                        <Button variant="outlined" color="secondary">Delete</Button>
+                        <DeleteButton 
+                            userId={user?.id}
+                            postId={post?.id}
+                        />
                     </div>
                 </div>
-
                 <Typography variant="h6" className={classes.postTitle}>{`#${post.id} - ${post.title}`}</Typography>
                 <Typography variant="body1">{post.body}</Typography>               
             </Paper>
+
         </div>
 
     )

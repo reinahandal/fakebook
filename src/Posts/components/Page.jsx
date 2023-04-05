@@ -64,7 +64,8 @@ function Page() {
                 {
                     posts.map(item => (
                         <Post 
-                            id={item.id} 
+                            postId={item.id} 
+                            userId={item.userId}
                             title={item.title} 
                             body={item.body}
                             key={item.id}
