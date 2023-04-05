@@ -6,6 +6,7 @@ export const usePosts = id => {
     const { data, isLoading, isError } = useQuery({
         queryKey: [QUERY_KEY.POSTS, id],
         queryFn: () => fetchPosts(id),
+        retry: false,
     });
     return {
         data,

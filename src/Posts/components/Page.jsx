@@ -5,14 +5,26 @@ import Post from "./Post";
 import { ROUTES } from '../../Users/constants';
 import { ROUTES as POSTS_ROUTES } from '../constants';
 import { makeStyles } from "@material-ui/core";
+import { useUser } from "../../Users/useUser";
+import UserCard from "../../Users/components/UserCard";
+import ErrorIndicator from "../../common/ErrorIndicator";
+import LoadingIndicator from "../../common/LoadingIndicator";
 
 const useStyles = makeStyles({
     root: {
         marginTop: 16,
         marginLeft: 16,
+        width:'100%',
+    },
+    userCard: {
+        margin: '24px 0',
+        width: '50%',
+    },
+    posts:{
+        width:'50%',
     },
     title:{
-        margin: '16px 0',
+        margin: '24px 0',
     },
     links: {
         display: 'flex',
@@ -28,14 +40,17 @@ function Page() {
     // fetches posts of a particular user
     const { data: posts, isLoading, isError } = usePosts(id);
 
-    if (isLoading) {
+    // fetches user info
+    const { data: user, isLoading: isUserLoading, isError: isUserError} = useUser(id);
+
+    if (isLoading || isUserLoading) {
         return (
-            <Typography variant="h5">Loading Posts...</Typography>
+            <LoadingIndicator/>
         )
     }
-    if (isError) {
+    if (isError || isUserError) {
         return (
-            <Typography variant="h5">Something went wrong</Typography>
+            <ErrorIndicator/>
         )
     }
     else {
@@ -55,23 +70,36 @@ function Page() {
                     Create Post
                     </Typography>
                 </div>
-                <Typography 
-                    variant="h4"   
-                    className={classes.title}
-                >
-                Posts
-                </Typography>
-                {
-                    posts.map(item => (
-                        <Post 
-                            postId={item.id} 
-                            userId={item.userId}
-                            title={item.title} 
-                            body={item.body}
-                            key={item.id}
-                        />
-                    ))
-                }
+                <div className={classes.profile}>
+                    <UserCard
+                        name={user.name}
+                        phone={user.phone}
+                        username={user.username}
+                        email={user.email}
+                        address={user.address}
+                        website={user.website}
+                        style={classes.userCard}
+                    />
+                    <div className={classes.posts}>
+                    {/* <Typography 
+                        variant="h4"   
+                        className={classes.title}
+                    >
+                    Posts
+                    </Typography> */}
+                    {
+                        posts.map(item => (
+                            <Post 
+                                postId={item.id} 
+                                userId={item.userId}
+                                title={item.title} 
+                                body={item.body}
+                                key={item.id}
+                            />
+                        ))
+                    }
+                    </div>
+                </div>
             </div>
         )
     }

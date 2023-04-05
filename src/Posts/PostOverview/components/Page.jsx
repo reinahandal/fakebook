@@ -6,6 +6,8 @@ import { makeStyles } from "@material-ui/styles";
 import { ROUTES as POSTS_ROUTES } from "../../constants";
 import { ROUTES } from "../constants";
 import DeleteButton from "./DeleteButton";
+import LoadingIndicator from "../../../common/LoadingIndicator";
+import ErrorIndicator from "../../../common/ErrorIndicator";
 
 const useStyles = makeStyles({
     root:{
@@ -41,11 +43,11 @@ function Page() {
     
     const { data: user, isLoading: isUserLoading, isError: isUserError} = useUser(post?.userId);
 
-    if(isPostLoading || isUserLoading){
-        return (<Typography>Loading Post...</Typography>)
+    if(isPostLoading || isUserLoading) {
+        return (<LoadingIndicator/>)
     }
     if(isPostError) {
-        return (<Typography>Something went wrong</Typography>)
+        return (<ErrorIndicator/>)
     }
 
     return (

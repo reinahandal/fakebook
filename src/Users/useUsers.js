@@ -6,6 +6,7 @@ export const useUsers = () => {
     const { data, isLoading, isError } = useQuery({
             queryKey: [QUERY_KEY], 
             queryFn: () => fetchUsers(),
+            retry: false,
         });
 
     return {
