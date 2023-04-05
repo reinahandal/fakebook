@@ -7,10 +7,10 @@ import ConfirmDialog from "./ConfirmDialog";
 
 function DeleteButton(props) {
     const [open, setOpen] = useState(false);
-    const { postId, userId } = props;
+    const { postId, userId, size } = props;
     const history = useHistory();
 
-    const { mutate } = useDeletePost();
+    const { mutate, isLoading, isSuccess } = useDeletePost();
 
     const deletePost = () => {
         try {
@@ -22,7 +22,10 @@ function DeleteButton(props) {
 
     const handleClose = () => setOpen(false)
 
-    const onSuccess = () => history.push(generatePath(ROUTES.USER, { id: userId }))
+    const onSuccess = () => {
+        history.push(generatePath(ROUTES.USER, { id: userId }))
+        handleClose();
+    }
 
     return (
         <>
@@ -30,6 +33,7 @@ function DeleteButton(props) {
         variant="outlined" 
         color="secondary"
         onClick={e => setOpen(true)}
+        size={size}
         >
         Delete
         </Button>
@@ -41,6 +45,7 @@ function DeleteButton(props) {
                 subtitle={"This is an irreversible action"}
                 handleConfirm={deletePost}
                 handleClose={handleClose}
+                isLoading={isLoading}
             />
         }
         </>

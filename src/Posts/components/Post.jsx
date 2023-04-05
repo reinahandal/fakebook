@@ -16,6 +16,9 @@ const useStyles = makeStyles({
     },
     title: {
         marginBottom: 16,
+    },
+    deleteBtn:{
+        width:'fit-content',
     }
 })
 
@@ -34,10 +37,14 @@ function Post(props) {
                 >
                 {`#${postId} ${title}`}
                 </Typography>
+                <div className={classes.deleteBtn}>
                 <DeleteButton
                     userId={userId}
                     postId={postId}
+                    size={"small"}
                 />
+                </div>
+
             </div>
 
             <Typography 

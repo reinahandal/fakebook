@@ -56,7 +56,7 @@ function Page() {
                 component={Link} 
                 to={generatePath(POSTS_ROUTES.USER, {id: post?.userId})}
             >
-            Go back
+                {`${user?.name}'s Profile`}
             </Typography>
             <Paper className={classes.post}>
                 <div className={classes.topSection}>

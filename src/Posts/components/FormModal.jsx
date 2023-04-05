@@ -6,7 +6,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useForm } from "react-hook-form";
 
-
 function FormModal(props) {
     const { initialValues, onSubmitForm, handleClose, formTitle, isModalOpen } = props;
 

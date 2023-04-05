@@ -61,7 +61,7 @@ function Page() {
                         component={RouterLink}
                         to={ROUTES.ROOT}
                     >
-                    Go back
+                    All Users
                     </Typography>
                     <Typography
                         component={RouterLink}
