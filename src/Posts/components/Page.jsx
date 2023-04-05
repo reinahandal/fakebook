@@ -38,17 +38,18 @@ function Page() {
     const { id } = useParams();
 
     // fetches posts of a particular user
-    const { data: posts, isLoading, isError } = usePosts(id);
+    const { data: posts, isLoading: isPostsLoading, isError: isPostsError } = usePosts(id);
 
     // fetches user info
-    const { data: user, isLoading: isUserLoading, isError: isUserError} = useUser(id);
+    const { data: user, isLoading: isUserLoading, isError: isUserError } = useUser(id);
 
-    if (isLoading || isUserLoading) {
+
+    if (isPostsLoading || isUserLoading) {
         return (
             <LoadingIndicator/>
         )
     }
-    if (isError || isUserError) {
+    if (isPostsError || isUserError) {
         return (
             <ErrorIndicator/>
         )
@@ -61,36 +62,30 @@ function Page() {
                         component={RouterLink}
                         to={ROUTES.ROOT}
                     >
-                    All Users
+                        All Users
                     </Typography>
                     <Typography
                         component={RouterLink}
                         to={generatePath(POSTS_ROUTES.NEW, { id })}
                     >
-                    Create Post
+                        Create Post
                     </Typography>
                 </div>
-                <div className={classes.profile}>
-                    <UserCard
-                        name={user.name}
-                        phone={user.phone}
-                        username={user.username}
-                        email={user.email}
-                        address={user.address}
-                        website={user.website}
-                        style={classes.userCard}
-                    />
-                    <div className={classes.posts}>
-                    {/* <Typography 
-                        variant="h4"   
-                        className={classes.title}
-                    >
-                    Posts
-                    </Typography> */}
+
+                <UserCard
+                    name={user.name}
+                    phone={user.phone}
+                    username={user.username}
+                    email={user.email}
+                    address={user.address}
+                    website={user.website}
+                    style={classes.userCard}
+                />
+                <div className={classes.posts}>
                     {
                         posts.map(item => (
                             <Post 
-                                postId={item.id} 
+                                postId={item.id}
                                 userId={item.userId}
                                 title={item.title} 
                                 body={item.body}
@@ -98,7 +93,6 @@ function Page() {
                             />
                         ))
                     }
-                    </div>
                 </div>
             </div>
         )

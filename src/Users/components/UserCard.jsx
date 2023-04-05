@@ -2,12 +2,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles({
-  title: {
+  username: {
     fontSize: 14,
   },
-  pos: {
+  name:{
+    margin: '8px 0',
+  },
+  contact: {
     marginBottom: 8,
     fontSize: 14,
   },
@@ -17,7 +21,6 @@ function UserCard(props) {
     const classes = useStyles();
 
     const { name, username, email, address, website, phone, style } = props;
-
 
     const addressFormatter = val => {
       return (
@@ -32,26 +35,36 @@ function UserCard(props) {
     return (
         <Card className={style}>
             <CardContent>
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
+            <Typography className={classes.username} color="textSecondary" gutterBottom>
                 {username}
             </Typography>
-            <Typography variant="h5" component="h2">
+            <Typography variant="h5" component="h2" className={classes.name}>
                 {name} 
             </Typography>
-            <Typography className={classes.pos} color="textSecondary">
+            <Typography className={classes.contact} color="textSecondary">
                 {email}
                 <br/>
                 {phone}
             </Typography>
-            <Typography className={classes.pos} color="textSecondary">
+            <Typography className={classes.contact} color="textSecondary">
                 {website}
             </Typography>
             <Typography variant="body2" component="p">
-                {addressFormatter(address)}
+                {address && addressFormatter(address)}
             </Typography>
             </CardContent>
         </Card>
     )
+}
+
+UserCard.propTypes = {
+  name: PropTypes.string, 
+  username: PropTypes.string, 
+  email: PropTypes.string, 
+  address: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])), 
+  website: PropTypes.string, 
+  phone: PropTypes.string, 
+  style: PropTypes.string,
 }
 
 export default UserCard;

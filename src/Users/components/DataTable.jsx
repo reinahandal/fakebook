@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import { generatePath, Link } from "react-router-dom";
 import { ROUTES as POSTS_ROUTES } from '../../Posts/constants';
 import { Typography } from '@material-ui/core';
-
+import PropTypes from 'prop-types'
 
 const useStyles = makeStyles({
     table: {
@@ -66,12 +66,12 @@ const useStyles = makeStyles({
 const DataTable = (props) => {
     const classes = useStyles();
     const { data } = props;
-    
+
     const properties = Object.keys(data[0]);
 
     const formatCell = (code, prop, id) => {
 
-        if(FORMATTER[code] && typeof FORMATTER[code] === 'function'){
+        if(FORMATTER[code]) {
             return FORMATTER[code](prop, id);
         } else {
           return (
@@ -118,5 +118,12 @@ const DataTable = (props) => {
     )
 }
 
+DataTable.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+}
+
+DataTable.defaultProps = {
+  data: [{}],
+}
 
 export default DataTable;

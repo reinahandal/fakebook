@@ -5,17 +5,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import LoadingIndicator from '../../../common/LoadingIndicator'
-import { makeStyles } from '@material-ui/styles';
-
-const useStyles = makeStyles({
-  root:{
-    minWidth: 500,
-  }
-})
+import PropTypes from 'prop-types';
 
 function ConfirmDialog(props) {
     const { title, subtitle, open, handleClose, handleConfirm, isLoading } = props;
-    const classes = useStyles();
+
       return (
         <div>
           <Dialog
@@ -23,7 +17,6 @@ function ConfirmDialog(props) {
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
-            className={classes.root}
             fullWidth
           >
             {
@@ -41,13 +34,22 @@ function ConfirmDialog(props) {
                   <Button onClick={handleClose} color="primary">
                     Cancel
                   </Button>
-                  <Button onClick={handleConfirm} color="primary" autoFocus>
-                    Confirm
+                  <Button onClick={handleConfirm} color="primary" disabled={isLoading} autoFocus>
+                    {isLoading ? "Deleting..." : "Confirm"}
                   </Button>
                 </DialogActions> 
           </Dialog>
         </div>
       );
+}
+
+ConfirmDialog.propTypes = {
+  title: PropTypes.string.isRequired, 
+  subtitle: PropTypes.string.isRequired, 
+  open: PropTypes.bool.isRequired, 
+  handleClose: PropTypes.func.isRequired, 
+  handleConfirm: PropTypes.func.isRequired, 
+  isLoading: PropTypes.bool.isRequired,
 }
 
 export default ConfirmDialog;

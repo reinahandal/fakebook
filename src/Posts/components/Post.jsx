@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { generatePath, Link } from "react-router-dom";
 import DeleteButton from "../PostOverview/components/DeleteButton";
 import { ROUTES as POST_OVERVIEW_ROUTES } from "../PostOverview/constants";
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
     root: {
@@ -56,5 +57,12 @@ function Post(props) {
         </Card>
     )
 }
+
+Post.propTypes = {
+    userId: PropTypes.number.isRequired,
+    postId: PropTypes.number.isRequired, 
+    title: PropTypes.string.isRequired, 
+    body: PropTypes.string.isRequired,
+};
 
 export default Post;

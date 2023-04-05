@@ -5,7 +5,7 @@ import { QUERY_KEY } from "../constants";
 export const useDeletePost = () => {
     const queryClient = useQueryClient();
 
-    const { mutate, isLoading } = useMutation({
+    const { mutateAsync, isLoading } = useMutation({
         mutationFn: ({userId, postId}) => deletePost(userId, postId),
         onSuccess: ({userId, postId}) => {
             queryClient.setQueryData([QUERY_KEY.POSTS, userId], oldData =>
@@ -14,7 +14,7 @@ export const useDeletePost = () => {
         }
     });
     return {
-        mutate,
+        mutate: mutateAsync,
         isLoading,
     }
 }

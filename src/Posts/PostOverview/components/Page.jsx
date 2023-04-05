@@ -46,7 +46,7 @@ function Page() {
     if(isPostLoading || isUserLoading) {
         return (<LoadingIndicator/>)
     }
-    if(isPostError) {
+    if(isPostError || isUserError) {
         return (<ErrorIndicator/>)
     }
 

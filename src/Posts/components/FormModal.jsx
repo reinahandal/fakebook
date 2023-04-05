@@ -5,6 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useForm } from "react-hook-form";
+import PropTypes from 'prop-types'
 
 function FormModal(props) {
     const { initialValues, onSubmitForm, handleClose, formTitle, isModalOpen } = props;
@@ -70,6 +71,14 @@ function FormModal(props) {
           </Dialog>
         </div>
     );
+}
+
+FormModal.propTypes = {
+    initialValues: PropTypes.object.isRequired, 
+    onSubmitForm: PropTypes.func.isRequired, 
+    handleClose: PropTypes.func.isRequired, 
+    formTitle: PropTypes.string.isRequired, 
+    isModalOpen: PropTypes.bool.isRequired,
 }
 
 export default FormModal;
