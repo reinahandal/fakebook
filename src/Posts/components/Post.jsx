@@ -28,7 +28,10 @@ function Post(props) {
     const classes = useStyles();
 
     return (
-        <Card variant="outlined" className={classes.root}>
+        <Card 
+            variant="outlined" 
+            className={classes.root}
+        >
             <div className={classes.topSection}>
                 <Typography 
                     variant="h6" 
@@ -47,7 +50,6 @@ function Post(props) {
                 </div>
 
             </div>
-
             <Typography 
                 variant="body1" 
                 color="textSecondary"

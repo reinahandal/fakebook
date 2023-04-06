@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import PropTypes from 'prop-types'
 
 function FormModal(props) {
@@ -17,8 +17,8 @@ function FormModal(props) {
 
     const {
         handleSubmit,
-        register,
         formState: { isSubmitting },
+        control,
     } = methods;
 
     const onSubmit = data => onSubmitForm(data)
@@ -34,24 +34,38 @@ function FormModal(props) {
             <DialogTitle id="form-dialog-title">{formTitle}</DialogTitle>
             <DialogContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                        <TextField
-                        autoFocus
-                        margin="dense"
-                        id="title"
-                        label="Title"
-                        fullWidth
-                        name="title"
-                        {...register("title")}
+                        <Controller
+                            control={control}
+                            name="title"
+                            defaultValue=""
+                            render={({
+                                field
+                            }) => (
+                                <TextField
+                                    {...field}
+                                    autoFocus
+                                    margin="dense"
+                                    label="Title"
+                                    fullWidth
+                                />
+                            )}
                         />
-                        <TextField
-                        multiline
-                        rows={5}
-                        margin="dense"
-                        id="name"
-                        label="Text"
-                        fullWidth
-                        name="body"
-                        {...register("body")}
+                        <Controller
+                            name="body"
+                            control={control}
+                            defaultValue=""
+                            render={({
+                                field
+                            }) => (
+                                <TextField
+                                    {...field}
+                                    multiline
+                                    rows={5}
+                                    margin="dense"
+                                    label="Text"
+                                    fullWidth
+                                />                                
+                            )}
                         />
                         <DialogActions>
                             <Button onClick={handleClose} color="primary">
@@ -60,6 +74,7 @@ function FormModal(props) {
                             <Button 
                                 type="submit" 
                                 color="primary"
+                                disabled={isSubmitting}
                             >
                                 {
                                 isSubmitting ? `Loading...` : 'Submit'
@@ -74,11 +89,15 @@ function FormModal(props) {
 }
 
 FormModal.propTypes = {
-    initialValues: PropTypes.object.isRequired, 
+    formTitle: PropTypes.string.isRequired,
+    initialValues: PropTypes.object,
     onSubmitForm: PropTypes.func.isRequired, 
     handleClose: PropTypes.func.isRequired, 
-    formTitle: PropTypes.string.isRequired, 
     isModalOpen: PropTypes.bool.isRequired,
+}
+
+FormModal.defaultProps = {
+    initialValues: {},
 }
 
 export default FormModal;

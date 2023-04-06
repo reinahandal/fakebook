@@ -11,7 +11,7 @@ function DeleteButton(props) {
     const { postId, userId, size } = props;
     const history = useHistory();
 
-    const { mutate, isLoading } = useDeletePost();
+    const { mutate, isLoading, isSuccess } = useDeletePost();
     
     const deletePost = async () => {
         try {
@@ -24,8 +24,10 @@ function DeleteButton(props) {
     const handleClose = () => setOpen(false);
 
     const onSuccess = () => {
-        history.push(generatePath(ROUTES.USER, { id: userId }))
-        handleClose();
+        if(isSuccess){
+            handleClose();
+            history.push(generatePath(ROUTES.USER, { id: userId }))
+        }
     }
 
     return (
@@ -37,7 +39,7 @@ function DeleteButton(props) {
         size={size}
         
         >
-        Delete
+            Delete
         </Button>
         
         <ConfirmDialog
@@ -58,4 +60,7 @@ DeleteButton.propTypes = {
     size: PropTypes.string,
 };
 
+DeleteButton.defaultProps = {
+    size: 'medium',
+}
 export default DeleteButton;

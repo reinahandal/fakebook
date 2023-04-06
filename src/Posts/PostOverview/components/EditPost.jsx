@@ -15,7 +15,7 @@ function EditPost() {
         history.push(generatePath(ROUTES.OVERVIEW, { id }));
     }
 
-    const { data: post, isError } = usePost(id);
+    const { data: post } = usePost(id);
 
     const { mutateAsync } = useUpdatePost();
 
@@ -28,7 +28,7 @@ function EditPost() {
         } catch(e){
         }
     }
-    if(post){
+    if(post) {
         return (
             <FormModal
                 formTitle={"Edit Post"}

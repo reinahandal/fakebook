@@ -13,7 +13,7 @@ function ErrorIndicator() {
     const classes = useStyles();
 
     return (
-        <Typography className={classes.text}>An error has occurred</Typography>
+        <Typography className={classes.text}>An error has occurred.</Typography>
     )
 }
 

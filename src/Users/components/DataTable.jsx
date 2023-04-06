@@ -6,124 +6,63 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { generatePath, Link } from "react-router-dom";
-import { ROUTES as POSTS_ROUTES } from '../../Posts/constants';
-import { Typography } from '@material-ui/core';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { formatCell } from '../userFormatter'
 
 const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
-    propTitle: {
-        textTransform:'capitalize',
-    },
-  });
+  table: {
+    minWidth: 650,
+  },
+  propTitle: {
+    textTransform: 'capitalize',
+  },
+});
 
-  const addressFormatter = (value) => {
-    return (
-        <>
-        <Typography>{`${value.suite}, ${value.street}, ${value.city}`}</Typography>
-        <Typography>{`${value.zipcode}`}</Typography>
-        </>
-    )
-  }
+function DataTable(props) {
+  const classes = useStyles();
+  const { data, columns } = props;
 
-  const companyFormatter = (value) => {
-    return (
-        <>
-        <Typography>{`${value.name}`}</Typography>
-        <Typography>{`${value.bs}`}</Typography>
-        <Typography>{`${value.catchPhrase}`}</Typography>
-        </>
-    )
-  }
-
-  const telephoneFormatter = (value) => {
-    return (
-    <Typography><a href={`tel:${value}`}>{value}</a></Typography>
-    )
-  }
-
-  const nameFormatter = (value, id) => {
-    return (
-        <Typography 
-          component={Link}
-          to={(generatePath(POSTS_ROUTES.USER, {id: id}))}
-        >
-          {value}
-        </Typography>
-    )
-  }
-
-  const FORMATTER  = {
-    name: nameFormatter,
-    address: addressFormatter,
-    company: companyFormatter,
-    phone: telephoneFormatter,
-  }
-
-const DataTable = (props) => {
-    const classes = useStyles();
-    const { data } = props;
-
-    const properties = Object.keys(data[0]);
-
-    const formatCell = (code, prop, id) => {
-
-        if(FORMATTER[code]) {
-            return FORMATTER[code](prop, id);
-        } else {
-          return (
-            <Typography>{prop}</Typography>
-        )
-        }
-    }
-
-    return (
-        <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
+  return (
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
             <TableRow>
+            {columns.map(column => (
+                <TableCell key={column} className={classes.propTitle}>
+                    {column}
+                </TableCell>
+            ))}
+            </TableRow>
+        </TableHead>
+        <TableBody>
+        {data.map(item => (
+            <TableRow 
+                hover 
+                className={classes.dataRow} 
+                key={item.id}
+            >
                 {
-                    properties.map(prop => (
-                        <TableCell key={prop} className={classes.propTitle}>{prop}</TableCell>
+                    columns.map(col => (
+                        <TableCell key={`${item.id}-${col}`}>
+                            {formatCell(col, item[col], item.id)}
+                        </TableCell>
                     ))
                 }
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {
-                data.map(item => (
-                    <TableRow
-                        hover
-                        className={classes.dataRow}
-                        key={item.id}
-                    >
-                        {/* {
-                            properties.map(prop => (<TableCell key={`${item.id}-${prop}`}>{formatCell(prop, item[prop], item.id)}</TableCell>))
-                        } */}
-                        {
-                          Object.entries(item).map(([key,value]) => 
-                            (<TableCell key={`${item.id}-${key}`}>
-                              {formatCell(key, value, item.id)}
-                            </TableCell>))
-                        }
-                    </TableRow>
-                ))
-            }
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )
+        ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 DataTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
-}
+  columns: PropTypes.arrayOf(PropTypes.string),
+};
 
 DataTable.defaultProps = {
   data: [{}],
-}
+};
 
 export default DataTable;

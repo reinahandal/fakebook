@@ -1,9 +1,9 @@
 import { Container, Typography } from "@material-ui/core";
 import { useUsers } from "../useUsers";
-import DataTable from "./DataTable";
 import { makeStyles } from '@material-ui/core/styles';
 import LoadingIndicator from "../../common/LoadingIndicator";
 import ErrorIndicator from "../../common/ErrorIndicator";
+import DataTable from "./DataTable";
 
 const useStyles = makeStyles({
     title: {
@@ -12,9 +12,20 @@ const useStyles = makeStyles({
   });
 
 function Page() {
+    const classes = useStyles();
     
     const { data: users, isLoading, isError } = useUsers();
-    const classes = useStyles();
+
+    const columns = [
+        'id',
+        'name',
+        'username',
+        'email',
+        'phone',
+        'website',
+        'address',
+        'company'
+    ];
 
     if (isLoading) {
         return (
@@ -31,7 +42,10 @@ function Page() {
             <>
             <Container maxWidth="xl">
                 <Typography variant="h4" className={classes.title}>Users</Typography>
-                <DataTable data={users}/>
+                <DataTable
+                    data={users}
+                    columns={columns}
+                />
             </Container>
             </>
             )

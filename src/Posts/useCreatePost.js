@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createPost } from "./api"
 import { QUERY_KEY } from './constants';
 
-const useCreatePost = () => {
+export const useCreatePost = () => {
     const queryClient = useQueryClient();
 
     const { mutateAsync } = useMutation({
@@ -12,8 +12,8 @@ const useCreatePost = () => {
         onSuccess: ({ data, id }) => {
             queryClient.setQueryData([QUERY_KEY.POSTS, id], oldData => {
                 return [
-                    data,
                     ...oldData,
+                    data,
                 ];
             });
         },
@@ -23,5 +23,3 @@ const useCreatePost = () => {
         mutateAsync,
     }
 }
-
-export default useCreatePost;

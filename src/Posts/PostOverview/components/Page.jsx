@@ -46,6 +46,7 @@ function Page() {
     if(isPostLoading || isUserLoading) {
         return (<LoadingIndicator/>)
     }
+    
     if(isPostError || isUserError) {
         return (<ErrorIndicator/>)
     }
@@ -74,8 +75,8 @@ function Page() {
                             Edit
                         </Button>
                         <DeleteButton 
-                            userId={user?.id}
-                            postId={post?.id}
+                            userId={post.userId}
+                            postId={post.id}
                         />
                     </div>
                 </div>

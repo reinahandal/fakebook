@@ -43,7 +43,6 @@ function Page() {
     // fetches user info
     const { data: user, isLoading: isUserLoading, isError: isUserError } = useUser(id);
 
-
     if (isPostsLoading || isUserLoading) {
         return (
             <LoadingIndicator/>

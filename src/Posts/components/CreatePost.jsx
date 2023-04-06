@@ -1,15 +1,13 @@
 import { generatePath, useHistory, useParams } from "react-router-dom";
-import useCreatePost from "../useCreatePost";
 import FormModal from "./FormModal";
 import { ROUTES } from '../constants';
 import { useState } from "react";
+import { useCreatePost } from "../useCreatePost";
 
 function CreatePost() {
     const { id } = useParams();
     const [open, setOpen] = useState(true);
     const history = useHistory();
-
-    const initialValues = {}
 
     const { mutateAsync } = useCreatePost();
 
@@ -29,7 +27,6 @@ function CreatePost() {
     return (
         <FormModal 
             formTitle={"Create a new post"}
-            initialValues={initialValues}
             onSubmitForm={createPost}
             isModalOpen={open}
             handleClose={handleClose}

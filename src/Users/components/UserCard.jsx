@@ -24,11 +24,11 @@ function UserCard(props) {
 
     const addressFormatter = val => {
       return (
-        <Typography variant="body2" component="p">
+        <>
         {`${val.street}, ${val.suite}`}
         <br/>
         {`${val.city}, ${val.zipcode}`}
-        </Typography>
+        </>
       )
     }
 
@@ -38,7 +38,7 @@ function UserCard(props) {
             <Typography className={classes.username} color="textSecondary" gutterBottom>
                 {username}
             </Typography>
-            <Typography variant="h5" component="h2" className={classes.name}>
+            <Typography variant="h5" className={classes.name}>
                 {name} 
             </Typography>
             <Typography className={classes.contact} color="textSecondary">
@@ -49,7 +49,7 @@ function UserCard(props) {
             <Typography className={classes.contact} color="textSecondary">
                 {website}
             </Typography>
-            <Typography variant="body2" component="p">
+            <Typography variant="body2">
                 {address && addressFormatter(address)}
             </Typography>
             </CardContent>
@@ -61,7 +61,7 @@ UserCard.propTypes = {
   name: PropTypes.string, 
   username: PropTypes.string, 
   email: PropTypes.string, 
-  address: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object])), 
+  address: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number])), 
   website: PropTypes.string, 
   phone: PropTypes.string, 
   style: PropTypes.string,
