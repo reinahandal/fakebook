@@ -9,11 +9,11 @@ const useStyles = makeStyles({
     title: {
         margin: '24px 0',
     },
-  });
+});
 
 function Page() {
     const classes = useStyles();
-    
+
     const { data: users, isLoading, isError } = useUsers();
 
     const columns = [
@@ -29,27 +29,25 @@ function Page() {
 
     if (isLoading) {
         return (
-            <LoadingIndicator/>
+            <LoadingIndicator />
         )
     }
     if (isError) {
         return (
-            <ErrorIndicator/>
+            <ErrorIndicator />
         )
-
-    } else {
-        return (
-            <>
-            <Container maxWidth="xl">
-                <Typography variant="h4" className={classes.title}>Users</Typography>
-                <DataTable
-                    data={users}
-                    columns={columns}
-                />
-            </Container>
-            </>
-            )
     }
+
+    return (
+        <Container maxWidth="xl">
+            <Typography variant="h4" className={classes.title}>Users</Typography>
+            <DataTable
+                data={users}
+                columns={columns}
+            />
+        </Container>
+    )
+
 
 }
 
