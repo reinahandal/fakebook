@@ -1,8 +1,9 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { Redirect, Route, BrowserRouter as Router } from "react-router-dom";
 import UsersRoutes from "./Users/Routes";
 import PostsRoutes from './Posts/Routes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { ROUTE } from "./Users/constants";
 
 const theme = createMuiTheme({
   typography: {
@@ -17,8 +18,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
         <Router>
-          <UsersRoutes/>
-          <PostsRoutes/>
+          <Route path="/" exact>
+              <Redirect to={ROUTE.ROOT} />
+            </Route>
+            <UsersRoutes key={"UsersRoutes"} />
+            <PostsRoutes key={"PostsRoutes"} />
         </Router>
       </QueryClientProvider>
     </ThemeProvider>

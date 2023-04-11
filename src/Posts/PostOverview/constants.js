@@ -1,5 +1,5 @@
-export const ROUTES = {
-    OVERVIEW: `/posts/:id`,
+export const ROUTE = {
+    ROOT: `/posts/:id`,
     EDIT: `/posts/:id/edit`,
 }
 

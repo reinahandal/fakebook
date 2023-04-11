@@ -39,7 +39,6 @@ function Page() {
 
     } else {
         return (
-            <>
             <Container maxWidth="xl">
                 <Typography variant="h4" className={classes.title}>Users</Typography>
                 <DataTable
@@ -47,7 +46,6 @@ function Page() {
                     columns={columns}
                 />
             </Container>
-            </>
             )
     }
 

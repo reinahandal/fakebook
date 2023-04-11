@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { generatePath, useHistory, useParams } from "react-router-dom";
 import FormModal from "../../components/FormModal";
-import { ROUTES } from "../constants";
+import { ROUTE } from "../constants";
 import { usePost } from "../usePost";
 import { useUpdatePost } from "../useUpdatePost";
 
@@ -12,7 +12,7 @@ function EditPost() {
 
     const handleClose = () => {
         setOpen(false);
-        history.push(generatePath(ROUTES.OVERVIEW, { id }));
+        history.push(generatePath(ROUTE.ROOT, { id }));
     }
 
     const { data: post } = usePost(id);

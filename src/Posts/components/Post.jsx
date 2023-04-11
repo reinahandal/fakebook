@@ -2,7 +2,7 @@ import { Card, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles';
 import { generatePath, Link } from "react-router-dom";
 import DeleteButton from "../PostOverview/components/DeleteButton";
-import { ROUTES as POST_OVERVIEW_ROUTES } from "../PostOverview/constants";
+import { ROUTE as POST_OVERVIEW_ROUTE } from "../PostOverview/constants";
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles({
@@ -37,7 +37,7 @@ function Post(props) {
                     variant="h6" 
                     className={classes.title}
                     component={Link}
-                    to={generatePath(POST_OVERVIEW_ROUTES.OVERVIEW, {id: postId})}
+                    to={generatePath(POST_OVERVIEW_ROUTE.ROOT, {id: postId})}
                 >
                 {`#${postId} ${title}`}
                 </Typography>

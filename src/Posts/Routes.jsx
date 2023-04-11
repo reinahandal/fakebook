@@ -1,21 +1,19 @@
 import { Route } from "react-router-dom";
 import Container from "./Container";
-import { ROUTES } from './constants';
+import { ROUTE } from './constants';
 import PostOverviewRoutes from './PostOverview/Routes';
 import CreatePost from "./components/CreatePost";
 
 function Routes(){
-    return (
-        <>
-        <Route path={ROUTES.USER}>
+    return [
+        <Route key={ROUTE.ROOT} path={ROUTE.ROOT}>
             <Container/>
-            <Route path={ROUTES.NEW}>
+            <Route path={ROUTE.NEW} exact>
                 <CreatePost/>
             </Route>
-        </Route>
-        <PostOverviewRoutes/>
-        </>
-    )
+        </Route>,
+        <PostOverviewRoutes key={"PostOverviewRoutes"}/>
+    ]
 }
 
 export default Routes;

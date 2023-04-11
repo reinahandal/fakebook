@@ -2,8 +2,8 @@ import { Typography } from "@material-ui/core";
 import { useParams, Link as RouterLink, generatePath } from "react-router-dom";
 import { usePosts } from "../usePosts";
 import Post from "./Post";
-import { ROUTES } from '../../Users/constants';
-import { ROUTES as POSTS_ROUTES } from '../constants';
+import { ROUTE as USER_ROUTE } from '../../Users/constants';
+import { ROUTE as POST_ROUTE } from '../constants';
 import { makeStyles } from "@material-ui/core";
 import { useUser } from "../../Users/useUser";
 import UserCard from "../../Users/components/UserCard";
@@ -59,13 +59,13 @@ function Page() {
                 <div className={classes.links}>
                     <Typography
                         component={RouterLink}
-                        to={ROUTES.ROOT}
+                        to={USER_ROUTE.ROOT}
                     >
                         All Users
                     </Typography>
                     <Typography
                         component={RouterLink}
-                        to={generatePath(POSTS_ROUTES.NEW, { id })}
+                        to={generatePath(POST_ROUTE.NEW, { id })}
                     >
                         Create Post
                     </Typography>

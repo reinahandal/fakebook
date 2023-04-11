@@ -1,5 +1,5 @@
-export const ROUTES = {
-    USER: `/users/:id/posts`,
+export const ROUTE = {
+    ROOT: `/users/:id/posts`,
     NEW: `/users/:id/posts/new`,
 }
 

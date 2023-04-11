@@ -1,6 +1,6 @@
 import { generatePath, useHistory, useParams } from "react-router-dom";
 import FormModal from "./FormModal";
-import { ROUTES } from '../constants';
+import { ROUTE } from '../constants';
 import { useState } from "react";
 import { useCreatePost } from "../useCreatePost";
 
@@ -13,7 +13,7 @@ function CreatePost() {
 
     const handleClose = () => {
         setOpen(false);
-        history.push(generatePath(ROUTES.USER, { id }))
+        history.push(generatePath(ROUTE.ROOT, { id }))
     }
 
     const createPost = async data => {

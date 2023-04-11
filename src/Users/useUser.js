@@ -4,7 +4,7 @@ import { QUERY_KEY } from "./constants"
 
 export const useUser = id => {
     const { data, isLoading, isError } = useQuery({
-        queryKey: [QUERY_KEY.SINGLE, id],
+        queryKey: [QUERY_KEY.USERS, id],
         queryFn: () => fetchUser(id),
         retry: false,
     });

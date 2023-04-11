@@ -6,15 +6,28 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import LoadingIndicator from '../../../common/LoadingIndicator'
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 function ConfirmDialog(props) {
-    const { title, subtitle, open, handleClose, handleConfirm, isLoading } = props;
+  const { title, subtitle, open, onClose, onConfirm } = props;
+  const [isLoading, setIsLoading ] = useState(false);
+
+  const handleConfirm = async () => {
+    setIsLoading(true);
+    try{
+      const resp = await onConfirm();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
       return (
         <div>
           <Dialog
             open={open}
-            onClose={handleClose}
+            onClose={onClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             fullWidth
@@ -22,20 +35,20 @@ function ConfirmDialog(props) {
             {
               isLoading ? (<LoadingIndicator/>) :
               <>
-                <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+                <DialogTitle>{title}</DialogTitle>
                 <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
+                  <DialogContentText>
                     {subtitle}
                   </DialogContentText>
                 </DialogContent> 
               </>
             }
                 <DialogActions>
-                  <Button onClick={handleClose} color="primary">
+                  <Button onClick={onClose} color="primary">
                     Cancel
                   </Button>
                   <Button onClick={handleConfirm} color="primary" disabled={isLoading} autoFocus>
-                    {isLoading ? "Deleting..." : "Confirm"}
+                    { isLoading ? `Loading...` : `Confirm` }
                   </Button>
                 </DialogActions> 
           </Dialog>
@@ -47,9 +60,8 @@ ConfirmDialog.propTypes = {
   title: PropTypes.string.isRequired, 
   subtitle: PropTypes.string.isRequired, 
   open: PropTypes.bool.isRequired, 
-  handleClose: PropTypes.func.isRequired, 
-  handleConfirm: PropTypes.func.isRequired, 
-  isLoading: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired, 
+  onConfirm: PropTypes.func.isRequired, 
 }
 
 export default ConfirmDialog;

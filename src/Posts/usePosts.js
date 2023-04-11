@@ -7,6 +7,7 @@ export const usePosts = id => {
         queryKey: [QUERY_KEY.POSTS, id],
         queryFn: () => fetchPosts(id),
         retry: false,
+        staleTime: 300_000,
     });
     return {
         data,

@@ -1,5 +1,5 @@
 import { generatePath, Link } from "react-router-dom";
-import { ROUTES as POSTS_ROUTES } from '../Posts/constants';
+import { ROUTE as POST_ROUTE } from '../Posts/constants';
 import { Typography } from '@material-ui/core';
 
 export const addressFormatter = value => {
@@ -31,7 +31,7 @@ export const nameFormatter = (value, id) => {
     return (
         <Typography 
           component={Link}
-          to={(generatePath(POSTS_ROUTES.USER, {id: id}))}
+          to={(generatePath(POST_ROUTE.ROOT, {id: id}))}
         >
           {value}
         </Typography>

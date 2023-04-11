@@ -3,8 +3,8 @@ import { generatePath, Link, useParams } from "react-router-dom";
 import { usePost } from "../usePost";
 import { useUser } from '../../../Users/useUser';
 import { makeStyles } from "@material-ui/styles";
-import { ROUTES as POSTS_ROUTES } from "../../constants";
-import { ROUTES } from "../constants";
+import { ROUTE as POST_ROUTE } from "../../constants";
+import { ROUTE } from "../constants";
 import DeleteButton from "./DeleteButton";
 import LoadingIndicator from "../../../common/LoadingIndicator";
 import ErrorIndicator from "../../../common/ErrorIndicator";
@@ -55,7 +55,7 @@ function Page() {
         <div className={classes.root}>
             <Typography 
                 component={Link} 
-                to={generatePath(POSTS_ROUTES.USER, {id: post?.userId})}
+                to={generatePath(POST_ROUTE.ROOT, {id: post?.userId})}
             >
                 {`${user?.name}'s Profile`}
             </Typography>
@@ -70,7 +70,7 @@ function Page() {
                             variant="outlined" 
                             color="primary"
                             component={Link}
-                            to={generatePath(ROUTES.EDIT, {id: post.id})}
+                            to={generatePath(ROUTE.EDIT, {id: post.id})}
                         >
                             Edit
                         </Button>
