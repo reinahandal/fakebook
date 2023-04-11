@@ -4,18 +4,16 @@ import { ROUTES } from './constants';
 import PostOverviewRoutes from './PostOverview/Routes';
 import CreatePost from "./components/CreatePost";
 
-function Routes(){
-    return (
-        <>
-        <Route path={ROUTES.USER}>
-            <Container/>
-            <Route path={ROUTES.NEW}>
-                <CreatePost/>
+function Routes() {
+    return [
+        <Route key={ROUTES.USER} path={ROUTES.USER}>
+            <Container />
+            <Route path={ROUTES.NEW} exact>
+                <CreatePost />
             </Route>
-        </Route>
-        <PostOverviewRoutes/>
-        </>
-    )
+        </Route>,
+        <PostOverviewRoutes key="PostOverviewRoutes" />
+    ]
 }
 
 export default Routes;

@@ -4,18 +4,20 @@ import { ROUTES } from "./constants";
 import EditPost from "./components/EditPost";
 
 function Routes() {
-    return (
-        <>
-        <Route path={ROUTES.OVERVIEW}>
-            <Container/>
-            <Route path={ROUTES.EDIT}>
-                <EditPost/>
+    return [
+        <Route key={ROUTES.OVERVIEW} path={ROUTES.OVERVIEW}>
+            <Container />
+            <Route path={ROUTES.EDIT} exact>
+                <EditPost />
             </Route>
         </Route>
-    
-        </>
+    ]
 
-    )
+
+
+
+
+
 }
 
 export default Routes;
