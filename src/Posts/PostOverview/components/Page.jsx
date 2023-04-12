@@ -43,11 +43,11 @@ function Page() {
     
     const { data: user, isLoading: isUserLoading, isError: isUserError} = useUser(post?.userId);
 
-    if(isPostLoading || isUserLoading) {
+    if (isPostLoading || isUserLoading) {
         return (<LoadingIndicator/>)
     }
     
-    if(isPostError || isUserError) {
+    if (isPostError || isUserError) {
         return (<ErrorIndicator/>)
     }
 

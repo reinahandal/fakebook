@@ -1,64 +1,45 @@
-import { Button } from "@material-ui/core";
-import { useState } from "react";
+import { useDeletePost } from "../useDeletePost";
+import ConfirmButton from "./ConfirmButton";
+import PropTypes from 'prop-types';
 import { generatePath, useHistory } from "react-router-dom";
 import { ROUTE } from "../../constants";
-import { useDeletePost } from "../useDeletePost";
-import ConfirmDialog from "./ConfirmDialog";
-import PropTypes from 'prop-types';
 
 function DeleteButton(props) {
-    const [open, setOpen] = useState(false);
-    const { postId, userId, size } = props;
+    const { userId, postId, buttonSize } = props; 
     const history = useHistory();
 
     const { mutate } = useDeletePost();
     
     const deletePost = async () => {
         try {
-            await mutate({ userId, postId });
-            onSuccess();
+            const resp = await mutate({ userId, postId });
         } catch(e) {
             console.error(e);
         }
     }
 
-    const handleClose = () => setOpen(false);
-
-    const onSuccess = () => {
-        handleClose();
-        history.push(generatePath(ROUTE.ROOT, { id: userId }))
-    }
+    const successRedirect = () => history.push(generatePath(ROUTE.ROOT, { id: userId }))
 
     return (
-        <>
-            <Button
-            variant="outlined" 
-            color="secondary"
-            onClick={e => setOpen(true)}
-            size={size}
-            
-            >
-                Delete
-            </Button>
-            
-            <ConfirmDialog
-                open={open}
-                title={"Are you sure you want to delete this post?"}
-                subtitle={"This is an irreversible action"}
-                onConfirm={deletePost}
-                onClose={handleClose}
-            />
-        </>
+        <ConfirmButton
+            confirmBtnText={"Delete"}
+            confirmDialogTitle={"Are you sure you want to delete this post?"} 
+            confirmDialogSubtitle={"This is an irreversible action"} 
+            onConfirm={deletePost}
+            size={buttonSize}
+            successRedirect={successRedirect}
+        />
     )
 }
 
 DeleteButton.propTypes = {
     userId: PropTypes.number.isRequired,
     postId: PropTypes.number.isRequired,
-    size: PropTypes.string,
+    buttonSize: PropTypes.string,
 };
 
 DeleteButton.defaultProps = {
-    size: 'medium',
-}
+    buttonSize: 'medium',
+};
+
 export default DeleteButton;

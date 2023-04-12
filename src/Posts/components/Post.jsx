@@ -45,10 +45,9 @@ function Post(props) {
                 <DeleteButton
                     userId={userId}
                     postId={postId}
-                    size={"small"}
+                    buttonSize={"small"}
                 />
                 </div>
-
             </div>
             <Typography 
                 variant="body1" 

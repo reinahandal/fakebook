@@ -10,7 +10,7 @@ export const addressFormatter = value => {
         </>
     )
 }
-  
+
 export const companyFormatter = value => {
     return (
         <>
@@ -20,20 +20,20 @@ export const companyFormatter = value => {
         </>
     )
 }
-  
+
 export const telephoneFormatter = value => {
     return (
     <Typography><a href={`tel:${value}`}>{value}</a></Typography>
     )
 }
-  
+
 export const nameFormatter = (value, id) => {
     return (
         <Typography 
-          component={Link}
-          to={(generatePath(POST_ROUTE.ROOT, {id: id}))}
+            component={Link}
+            to={(generatePath(POST_ROUTE.ROOT, {id: id}))}
         >
-          {value}
+            {value}
         </Typography>
     )
 }
@@ -50,12 +50,11 @@ export const SPECIAL_FORMATTER  = {
     company: companyFormatter,
     phone: telephoneFormatter,
 }
-  
+
 export const formatCell = (code, prop, id) => {
     if (SPECIAL_FORMATTER[code]) {
-      return SPECIAL_FORMATTER[code](prop, id);
+        return SPECIAL_FORMATTER[code](prop, id);
     } else {
-      return genericFormatter(prop);
+        return genericFormatter(prop);
     }
-  }
-  
+}

@@ -53,7 +53,7 @@ function Page() {
             <ErrorIndicator/>
         )
     }
-    else {
+
         return (
             <div className={classes.root}>
                 <div className={classes.links}>
@@ -95,8 +95,6 @@ function Page() {
                 </div>
             </div>
         )
-    }
-
 }
 
 export default Page;
